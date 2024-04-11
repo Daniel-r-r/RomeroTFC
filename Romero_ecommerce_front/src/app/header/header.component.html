@@ -4,7 +4,7 @@
   </span>
   <span class="space-buttons"></span>
 
-   <button *ngIf="! isLoggedIn()" routerLink="/login" mat-raised-button color="primary">
+   <button *ngIf="! isLoggedIn()" routerLink="/login" mat-raised-button color="accent">
     Login
    </button>
    <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button color="warn">
