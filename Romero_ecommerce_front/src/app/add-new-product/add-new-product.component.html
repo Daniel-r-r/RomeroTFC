@@ -3,28 +3,51 @@
 
         <div class="row">
             <div class="col-6">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Producto</mat-label>
-                    <input matInput placeholder="Ej: 'Harry Potter y la Piedra Filosofal'">
-                </mat-form-field>
 
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Descripción</mat-label>
-                    <input matInput placeholder="Breve descripción del producto">
-                </mat-form-field>
+                <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
 
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Precio</mat-label>
-                    <input matInput placeholder="Precio en €">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Producto</mat-label>
+                        <input matInput
+                            placeholder="Ej: 'Harry Potter y la Piedra Filosofal'"
+                            [(ngModel)]="product.productName"
+                            name="productName">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Precio en oferta</mat-label>
-                    <input matInput placeholder="Precio final con oferta">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput
+                            placeholder="Breve descripción del producto"
+                            [(ngModel)]="product.productDescription"
+                            name="productDescription">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Precio</mat-label>
+                        <input matInput placeholder="Precio en €"
+                            [(ngModel)]="product.productActualPrice"
+                            name="productActualPrice">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Precio en oferta</mat-label>
+                        <input matInput placeholder="Precio final con oferta"
+                            [(ngModel)]="product.productDiscountedPrice"
+                            name="productDiscountedPrice">
+                    </mat-form-field>
+
+                    <div align="end">
+                        <button mat-stroked-button
+                            color="primary" class="margin">Borrar</button>
+                        <button type="submit" mat-stroked-button
+                            color="primary">Añadir</button>
+                    </div>
+
+                </form>
             </div>
+
             <div class="col-6">
-                Image <area shape coords href alt>
+                Image
             </div>
         </div>
 
