@@ -1,9 +1,13 @@
 package com.romero.ecommerce.entity;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 /**
- * Clase de entidad que representa un producto en la aplicación de comercio electrónico.
+ * Clase de entidad que representa un producto en la aplicación de comercio
+ * electrónico.
+ * 
  * @author Daniel Romero
  */
 @Entity
@@ -12,11 +16,31 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer productId;
-
 	private String productName;
 	private String productDescription;
 	private Double productDiscountedPrice;
 	private Double productActualPrice;
+	
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "product_images",
+			joinColumns = {
+				@JoinColumn(name = "product_id")
+			},
+			inverseJoinColumns = {
+				@JoinColumn(name = "image_id")
+			}
+	)
+	
+	private Set<ImageModel> productImages;
+	
+
+	public Set<ImageModel> getProductImages() {
+		return productImages;
+	}
+
+	public void setProductImages(Set<ImageModel> productImages) {
+		this.productImages = productImages;
+	}
 
 	public Integer getProductId() {
 		return productId;
