@@ -9,6 +9,7 @@ import javax.persistence.*;
  *
  * @author Daniel Romero
  */
+
 @Entity
 @Table(name = "image_model")
 public class ImageModel {

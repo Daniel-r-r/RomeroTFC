@@ -15,7 +15,8 @@ import com.romero.ecommerce.entity.Product;
 import com.romero.ecommerce.service.ProductService;
 
 /**
- * Controlador para manejar las operaciones relacionadas con los productos en la aplicación de comercio electrónico.
+ * Controlador para manejar las operaciones relacionadas 
+ * con los productos en la aplicación de comercio electrónico.
  * @author Daniel Romero
  */
 @RestController
