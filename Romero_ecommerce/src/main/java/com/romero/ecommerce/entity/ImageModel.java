@@ -20,7 +20,7 @@ public class ImageModel {
 	private String name;
 	private String type;
 
-	@Column(length = 50000000)
+	@Column(length = 500000000)
 	private byte[] picByte;
 
 	public ImageModel() {
