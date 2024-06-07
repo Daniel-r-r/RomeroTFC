@@ -36,7 +36,7 @@
                             name="productDiscountedPrice">
                     </mat-form-field>
 
-                    <div align="end">
+                    <div align ="end">
                         <button mat-stroked-button
                             color="primary" class="margin">Borrar</button>
                         <button type="submit" mat-stroked-button
@@ -47,9 +47,42 @@
             </div>
 
             <div class="col-6">
-                <input type="file" multiple value="select" #selectFile 
-                    (change)="onFileSelected($event)"
-                >
+                <div>
+
+                    <div class="dropzone"
+                    appDrag
+                    (files) = "fileDropped($event)"
+                    >
+                        <div class="text-dropzone">
+                            <div class="centered">
+                            Arrastra tu imagen o <a (click)="selectFile.click()" class="selec-btn">seleccionala </a>
+                            desde tus archivos.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input multiple
+                     type="file"
+                     style="display: none;"
+                     #selectFile
+                     value="select"  
+                    (change)="onFileSelected($event)">
+                </div>
+
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="4" rowHeight="1:1">
+                            <mat-grid-tile *ngFor="let file of product.productImages; let i">
+                                <div style="position: relative">
+                                    <span class="btn-remove-image" (click)="removeImages(i)">x</span>
+                                    <img [src]="file.url" width="80" height="120px">
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
