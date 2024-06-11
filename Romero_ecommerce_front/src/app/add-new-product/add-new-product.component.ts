@@ -1,3 +1,4 @@
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from "@angular/core";
 import { Product } from "../_model/product.model";
 import { NgForm } from "@angular/forms";
@@ -12,7 +13,10 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ["./add-new-product.component.css"],
 })
 export class AddNewProductComponent implements OnInit {
+  isNewProduct = true;
+
   product: Product = {
+    productId: null,
     productName: "",
     productDescription: "",
     productDiscountedPrice: 0,
@@ -21,9 +25,17 @@ export class AddNewProductComponent implements OnInit {
   };
 
   constructor(private productService: ProductService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private activatedRoute: ActivatedRoute
+    ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.product = this.activatedRoute.snapshot.data['product'];
+
+    if(this.product && this.product.productId){
+      this.isNewProduct = false;
+    }
+  }
 
   addProduct(productForm: NgForm) {
 

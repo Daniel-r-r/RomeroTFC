@@ -75,19 +75,48 @@ public class ProductController {
 	 * 
 	 * @return Una lista de todos los productos.
 	 */
-	@GetMapping({"/getAllProducts"})
+	@GetMapping({ "/getAllProducts" })
 	public List<Product> getAllProducts() {
 		return productService.getAllProducts();
 	}
-	
+
+	/**
+	 * Recupera los detalles de un producto por su ID.
+	 * 
+	 * @param productId El ID del producto del cual se desean recuperar los
+	 *                  detalles.
+	 * @return El objeto Product que contiene los detalles del producto.
+	 */
+	@GetMapping({ "/getProductDetailsById/{productId}" })
+	public Product getProductDetailsById(@PathVariable("productId") Integer productId) {
+		return productService.getProductDetailsById(productId);
+
+	}
 
 	/**
 	 * Método utilizado para eliminar elementos de la tabla por ID.
 	 * 
 	 * @param productId
 	 */
-	@DeleteMapping ({"/deleteProductDetails/{productId}"})
+	@PreAuthorize("hasRole('Admin')")
+	@DeleteMapping("/deleteProductDetails/{productId}") // Asegurar que la ruta esté configurada correctamente
 	public void deleteProductDetails(@PathVariable("productId") Integer productId) {
 		productService.deleteProductDetails(productId);
+	}
+
+	/**
+	 * Método para obtener los detalles de un producto por ID exclusivamente para la
+	 * compra, tiene distintos parámetros que para ver el detalle
+	 * 
+	 * @param isSingleProductCheckout
+	 * @param productId
+	 * @return
+	 */
+	@PreAuthorize("hasRole('User')")
+	@GetMapping({ "/getProductDetails/{isSingleProductCheckout}/{productId}" })
+	public List<Product> getProductDetails(
+			@PathVariable(name = "isSingleProductCheckout") boolean isSingleProductCheckout,
+			@PathVariable(name = "productId") Integer productId) {
+		return productService.getProductDetails(isSingleProductCheckout, productId);
 	}
 }
